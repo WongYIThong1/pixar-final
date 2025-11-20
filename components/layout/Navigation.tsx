@@ -3,8 +3,7 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
-import { Moon, Sun, Menu, X, Code2, ChevronDown } from 'lucide-react';
-import { useTheme } from 'next-themes';
+import { Menu, X, ChevronDown } from 'lucide-react';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -14,32 +13,88 @@ import {
 
 export default function Navigation() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const { setTheme, theme } = useTheme();
+
+  const handleSmoothScroll = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    // 处理 Home 链接 - 滚动到顶部
+    if (href === '/' || href === '#') {
+      e.preventDefault();
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+      setMobileMenuOpen(false);
+      return;
+    }
+    
+    // 处理锚点链接
+    if (href.startsWith('#')) {
+      e.preventDefault();
+      const targetId = href.substring(1);
+      const targetElement = document.getElementById(targetId);
+      
+      if (targetElement) {
+        const navHeight = 64; // 导航栏高度 (h-16 = 4rem = 64px)
+        const targetPosition = targetElement.offsetTop - navHeight;
+        
+        window.scrollTo({
+          top: targetPosition,
+          behavior: 'smooth'
+        });
+      }
+      
+      // 关闭移动端菜单
+      setMobileMenuOpen(false);
+    }
+  };
 
   return (
-    <nav className="fixed top-0 w-full bg-background/80 backdrop-blur-lg border-b z-50">
+    <nav className="fixed top-0 w-full bg-background/80 backdrop-blur-lg border-b z-50 animate-fade-in-down">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
-          <div className="flex items-center gap-2">
-            <Code2 className="h-8 w-8 text-primary" />
-            <span className="text-xl font-bold">CodeCraft Pro</span>
+          <div className="flex items-center group cursor-pointer">
+            <span className="text-xl font-bold group-hover:text-primary transition-colors">Pixar</span>
           </div>
 
           <div className="hidden md:flex items-center gap-8">
-            <Link href="/" className="text-sm font-medium hover:text-primary transition-colors">
+            <Link 
+              href="/" 
+              className="text-sm font-medium hover:text-primary transition-all duration-300 hover:scale-110 relative group"
+              onClick={(e) => handleSmoothScroll(e, '/')}
+            >
               Home
+              <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-primary group-hover:w-full transition-all duration-300"></span>
             </Link>
-            <Link href="#services" className="text-sm font-medium hover:text-primary transition-colors">
+            <Link 
+              href="#services" 
+              className="text-sm font-medium hover:text-primary transition-all duration-300 hover:scale-110 relative group"
+              onClick={(e) => handleSmoothScroll(e, '#services')}
+            >
               Services
+              <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-primary group-hover:w-full transition-all duration-300"></span>
             </Link>
-            <Link href="#portfolio" className="text-sm font-medium hover:text-primary transition-colors">
+            <Link 
+              href="#portfolio" 
+              className="text-sm font-medium hover:text-primary transition-all duration-300 hover:scale-110 relative group"
+              onClick={(e) => handleSmoothScroll(e, '#portfolio')}
+            >
               Portfolio
+              <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-primary group-hover:w-full transition-all duration-300"></span>
             </Link>
-            <Link href="#about" className="text-sm font-medium hover:text-primary transition-colors">
+            <Link 
+              href="#about" 
+              className="text-sm font-medium hover:text-primary transition-all duration-300 hover:scale-110 relative group"
+              onClick={(e) => handleSmoothScroll(e, '#about')}
+            >
               About
+              <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-primary group-hover:w-full transition-all duration-300"></span>
             </Link>
-            <Link href="#contact" className="text-sm font-medium hover:text-primary transition-colors">
+            <Link 
+              href="#contact" 
+              className="text-sm font-medium hover:text-primary transition-all duration-300 hover:scale-110 relative group"
+              onClick={(e) => handleSmoothScroll(e, '#contact')}
+            >
               Contact
+              <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-primary group-hover:w-full transition-all duration-300"></span>
             </Link>
 
             <DropdownMenu>
@@ -58,27 +113,17 @@ export default function Navigation() {
           </div>
 
           <div className="hidden md:flex items-center gap-4">
-            <Button
-              variant="ghost"
-              size="icon"
-              onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
+            <Button 
+              className="hover:scale-105 transition-transform duration-300 hover-lift"
+              asChild
             >
-              <Sun className="h-5 w-5 rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
-              <Moon className="absolute h-5 w-5 rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
+              <a href="https://discord.gg/your-server" target="_blank" rel="noopener noreferrer">
+                Get Started
+              </a>
             </Button>
-            <Button variant="ghost">Login</Button>
-            <Button>Get Started</Button>
           </div>
 
           <div className="md:hidden flex items-center gap-2">
-            <Button
-              variant="ghost"
-              size="icon"
-              onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
-            >
-              <Sun className="h-5 w-5 rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
-              <Moon className="absolute h-5 w-5 rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
-            </Button>
             <Button
               variant="ghost"
               size="icon"
@@ -91,40 +136,40 @@ export default function Navigation() {
       </div>
 
       {mobileMenuOpen && (
-        <div className="md:hidden border-t">
+        <div className="md:hidden border-t animate-slide-in-down">
           <div className="px-4 py-4 space-y-3">
             <Link
               href="/"
               className="block text-sm font-medium hover:text-primary transition-colors"
-              onClick={() => setMobileMenuOpen(false)}
+              onClick={(e) => handleSmoothScroll(e, '/')}
             >
               Home
             </Link>
             <Link
               href="#services"
               className="block text-sm font-medium hover:text-primary transition-colors"
-              onClick={() => setMobileMenuOpen(false)}
+              onClick={(e) => handleSmoothScroll(e, '#services')}
             >
               Services
             </Link>
             <Link
               href="#portfolio"
               className="block text-sm font-medium hover:text-primary transition-colors"
-              onClick={() => setMobileMenuOpen(false)}
+              onClick={(e) => handleSmoothScroll(e, '#portfolio')}
             >
               Portfolio
             </Link>
             <Link
               href="#about"
               className="block text-sm font-medium hover:text-primary transition-colors"
-              onClick={() => setMobileMenuOpen(false)}
+              onClick={(e) => handleSmoothScroll(e, '#about')}
             >
               About
             </Link>
             <Link
               href="#contact"
               className="block text-sm font-medium hover:text-primary transition-colors"
-              onClick={() => setMobileMenuOpen(false)}
+              onClick={(e) => handleSmoothScroll(e, '#contact')}
             >
               Contact
             </Link>
@@ -143,8 +188,14 @@ export default function Navigation() {
               Terms of Service
             </Link>
             <div className="pt-4 space-y-2">
-              <Button variant="ghost" className="w-full">Login</Button>
-              <Button className="w-full">Get Started</Button>
+              <Button 
+                className="w-full"
+                asChild
+              >
+                <a href="https://discord.gg/your-server" target="_blank" rel="noopener noreferrer">
+                  Get Started
+                </a>
+              </Button>
             </div>
           </div>
         </div>

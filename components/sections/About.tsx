@@ -25,7 +25,7 @@ export default function About() {
   return (
     <section id="about" className="py-20 px-4 sm:px-6 lg:px-8 bg-muted/30">
       <div className="max-w-7xl mx-auto">
-        <div className="text-center space-y-4 mb-16">
+        <div className="text-center space-y-4 mb-16 animate-fade-in-up">
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold">
             About Us
           </h2>
@@ -35,7 +35,7 @@ export default function About() {
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
-          <Card>
+          <Card className="animate-fade-in-left hover-lift">
             <CardContent className="pt-6">
               <div className="space-y-6">
                 <div>
@@ -65,14 +65,14 @@ export default function About() {
           </Card>
 
           <div className="space-y-6">
-            <Card>
+            <Card className="animate-fade-in-right animation-delay-200 hover-lift group">
               <CardContent className="pt-6">
                 <div className="flex items-start gap-4">
                   <div className="h-12 w-12 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
                     <Award className="h-6 w-6 text-primary" />
                   </div>
                   <div>
-                    <h4 className="font-semibold text-lg mb-2">10+ Years Experience</h4>
+                    <h4 className="font-semibold text-lg mb-2 group-hover:text-primary transition-colors">10+ Years Experience</h4>
                     <p className="text-sm text-muted-foreground">
                       Extensive experience building production systems used by thousands of users daily
                     </p>
@@ -81,14 +81,14 @@ export default function About() {
               </CardContent>
             </Card>
 
-            <Card>
+            <Card className="animate-fade-in-right animation-delay-400 hover-lift group">
               <CardContent className="pt-6">
                 <div className="flex items-start gap-4">
                   <div className="h-12 w-12 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
                     <Users className="h-6 w-6 text-primary" />
                   </div>
                   <div>
-                    <h4 className="font-semibold text-lg mb-2">Client-Focused Approach</h4>
+                    <h4 className="font-semibold text-lg mb-2 group-hover:text-primary transition-colors">Client-Focused Approach</h4>
                     <p className="text-sm text-muted-foreground">
                       Direct communication, transparent pricing, and ongoing support for long-term success
                     </p>
@@ -97,14 +97,14 @@ export default function About() {
               </CardContent>
             </Card>
 
-            <Card>
+            <Card className="animate-fade-in-right animation-delay-600 hover-lift group">
               <CardContent className="pt-6">
                 <div className="flex items-start gap-4">
                   <div className="h-12 w-12 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
                     <Zap className="h-6 w-6 text-primary" />
                   </div>
                   <div>
-                    <h4 className="font-semibold text-lg mb-2">Modern Tech Stack</h4>
+                    <h4 className="font-semibold text-lg mb-2 group-hover:text-primary transition-colors">Modern Tech Stack</h4>
                     <p className="text-sm text-muted-foreground">
                       Using cutting-edge technologies and best practices for optimal performance
                     </p>
@@ -115,15 +115,20 @@ export default function About() {
           </div>
         </div>
 
-        <Card>
+        <Card className="animate-fade-in-up animation-delay-800 hover-lift">
           <CardContent className="pt-6">
             <div className="flex items-center gap-2 mb-4">
-              <Code2 className="h-5 w-5 text-primary" />
+              <Code2 className="h-5 w-5 text-primary animate-pulse-slow" />
               <h3 className="text-xl font-semibold">Technical Expertise</h3>
             </div>
             <div className="flex flex-wrap gap-2">
               {techStack.map((tech, index) => (
-                <Badge key={index} variant="secondary">
+                <Badge 
+                  key={index} 
+                  variant="secondary"
+                  className="hover:scale-110 hover:bg-primary/20 transition-all duration-300 cursor-default"
+                  style={{ animationDelay: `${index * 50}ms` }}
+                >
                   {tech}
                 </Badge>
               ))}

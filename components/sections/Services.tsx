@@ -5,7 +5,7 @@ export default function Services() {
   return (
     <section id="services" className="py-20 px-4 sm:px-6 lg:px-8 bg-muted/30">
       <div className="max-w-7xl mx-auto">
-        <div className="text-center space-y-4 mb-16">
+        <div className="text-center space-y-4 mb-16 animate-fade-in-up">
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold">
             Our Services
           </h2>
@@ -15,12 +15,14 @@ export default function Services() {
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-          <Card className="border-2 hover:border-primary transition-colors">
+          <Card 
+            className="border-2 hover:border-primary transition-all duration-300 hover-lift animate-fade-in-left group"
+          >
             <CardHeader>
               <div className="h-12 w-12 rounded-lg bg-primary/10 flex items-center justify-center mb-4">
                 <Globe className="h-6 w-6 text-primary" />
               </div>
-              <CardTitle className="text-2xl">Website Development</CardTitle>
+              <CardTitle className="text-2xl group-hover:text-primary transition-colors">Website Development</CardTitle>
               <CardDescription className="text-base">
                 Complete all-inclusive website solution from start to finish
               </CardDescription>
@@ -33,12 +35,12 @@ export default function Services() {
               </p>
 
               <div className="space-y-4">
-                <div className="flex gap-3">
-                  <div className="h-8 w-8 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
+                <div className="flex gap-3 group/item hover:translate-x-2 transition-transform duration-300">
+                  <div className="h-8 w-8 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0 group-hover/item:scale-110 group-hover/item:rotate-12 transition-all duration-300">
                     <Code className="h-4 w-4 text-primary" />
                   </div>
                   <div>
-                    <h4 className="font-semibold mb-1">Design & Development</h4>
+                    <h4 className="font-semibold mb-1 group-hover/item:text-primary transition-colors">Design & Development</h4>
                     <p className="text-sm text-muted-foreground">
                       Custom website design, frontend development with modern frameworks, and robust
                       backend systems tailored to your specific needs.
@@ -120,12 +122,14 @@ export default function Services() {
             </CardContent>
           </Card>
 
-          <Card className="border-2 hover:border-primary transition-colors">
+          <Card 
+            className="border-2 hover:border-primary transition-all duration-300 hover-lift animate-fade-in-right group"
+          >
             <CardHeader>
               <div className="h-12 w-12 rounded-lg bg-primary/10 flex items-center justify-center mb-4">
                 <Code className="h-6 w-6 text-primary" />
               </div>
-              <CardTitle className="text-2xl">Software Development</CardTitle>
+              <CardTitle className="text-2xl group-hover:text-primary transition-colors">Software Development</CardTitle>
               <CardDescription className="text-base">
                 Custom software solutions built for scalability and performance
               </CardDescription>
@@ -137,12 +141,12 @@ export default function Services() {
               </p>
 
               <div className="space-y-4">
-                <div className="flex gap-3">
-                  <div className="h-8 w-8 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
+                <div className="flex gap-3 group/item hover:translate-x-2 transition-transform duration-300">
+                  <div className="h-8 w-8 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0 group-hover/item:scale-110 group-hover/item:rotate-12 transition-all duration-300">
                     <Code className="h-4 w-4 text-primary" />
                   </div>
                   <div>
-                    <h4 className="font-semibold mb-1">Custom Software Development</h4>
+                    <h4 className="font-semibold mb-1 group-hover/item:text-primary transition-colors">Custom Software Development</h4>
                     <p className="text-sm text-muted-foreground">
                       Bespoke software solutions designed from the ground up to match your exact business
                       logic, workflows, and requirements. Desktop, web, or cloud-based applications.
